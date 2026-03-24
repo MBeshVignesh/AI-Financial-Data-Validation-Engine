@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hierarchy-migration-validation-agent"
+version = "0.1.0"
+description = "Local-first MVP for validating Oracle Smart View hierarchy migrations into curated ADLS-style targets."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "chromadb>=1.5.0",
+  "einops>=0.8.0",
+  "fastapi>=0.115.0",
+  "openpyxl>=3.1.0",
+  "pandas>=2.2.0",
+  "pydantic>=2.8.0",
+  "python-multipart>=0.0.9",
+  "sentence-transformers>=3.0.0",
+  "streamlit>=1.40.0",
+  "uvicorn>=0.30.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

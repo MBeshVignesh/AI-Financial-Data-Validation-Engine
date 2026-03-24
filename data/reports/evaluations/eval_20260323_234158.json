@@ -1,0 +1,207 @@
+{
+  "generated_at": "2026-03-23T23:43:21.033386",
+  "judge_mode_requested": "auto",
+  "judge_mode_used": "ollama",
+  "embedding_mode": "deterministic_dummy_for_reproducible_eval",
+  "cases": [
+    {
+      "name": "case_1_happy_path_multi_hierarchy",
+      "title": "Happy path multi-hierarchy",
+      "ingestion_warnings": [],
+      "rag_document_count": 75,
+      "overall_status": "PASSED",
+      "summary": {
+        "total_checks": 18,
+        "passed_checks": 18,
+        "failed_checks": 0,
+        "failed_records": 0
+      },
+      "dimensions": [
+        "account",
+        "entity"
+      ],
+      "actual_rule_keys": [],
+      "actual_members": [],
+      "agent_explanation": "### What Was Tested\n- Account - Missing members in target, Account - Parent existence, Account - Source parent vs target parent mismatch, Account - Duplicate members, Account - Leaf/non-leaf consistency, Account - Level consistency, Account - Row-level hierarchy match, Account - Mapping completeness, Account - Rollup preservation, Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Numeric value match, Entity - Mapping completeness\n\n### Passed\n- All 18 passed checks completed successfully for account, entity.\n- No hierarchy defects were detected in the uploaded source-versus-target comparison.\n- No failed checks or flagged records were produced in this run.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_1_happy_path_multi_hierarchy_x5vv0m8y/data/reports/validation_20260324044158_1dd10645.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_1_happy_path_multi_hierarchy_x5vv0m8y/data/reports/validation_20260324044158_1dd10645.md",
+      "judge": {
+        "score": 4.0,
+        "strengths": [
+          "Passed all checks as expected"
+        ],
+        "misses": [
+          "Additional summary information provided"
+        ],
+        "reason": "The overall pass/fail status matches the expectation. However, an additional summary information was provided with the actual output, which could have been omitted.",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_2_structural_defects",
+      "title": "Structural defect mix",
+      "ingestion_warnings": [],
+      "rag_document_count": 70,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 17,
+        "passed_checks": 8,
+        "failed_checks": 9,
+        "failed_records": 16
+      },
+      "dimensions": [
+        "account",
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "account:leaf_flag_consistency",
+        "account:level_consistency",
+        "account:missing_members_in_target",
+        "account:parent_mismatch",
+        "account:rollup_preservation",
+        "account:row_level_match",
+        "entity:parent_existence",
+        "entity:parent_mismatch",
+        "entity:row_level_match"
+      ],
+      "actual_members": [
+        "California_BU",
+        "License_Rev",
+        "Rent_Expense",
+        "Subscription_Rev",
+        "Total_Expense",
+        "Total_Revenue"
+      ],
+      "agent_explanation": "### What Was Tested\n- Account - Missing members in target, Account - Parent existence, Account - Source parent vs target parent mismatch, Account - Duplicate members, Account - Leaf/non-leaf consistency, Account - Level consistency, Account - Row-level hierarchy match, Account - Mapping completeness, Account - Rollup preservation, Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Mapping completeness\n\n### What Failed\n- Account - Missing members in target (1 failed records), Account - Source parent vs target parent mismatch (1 failed records), Account - Leaf/non-leaf consistency (1 failed records), Account - Level consistency (1 failed records)\n- 9 failed checks were recorded and 16 records were flagged.\n\n### Likely Cause\n- The target load likely filtered out valid source members or the curated insert step missed a subset of records., The parent-child remapping logic is likely outdated relative to the Smart View source hierarchy., Leaf flags appear to have been copied or derived incorrectly after parent-child relationships changed.\n\n### Recommended Action\n- Re-run the target load for the missing members and review any filters applied during normalization., Compare the mapping logic to the current source hierarchy and correct the parent remap rules., Recompute leaf indicators from the final hierarchy graph instead of preserving stale flags.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_2_structural_defects_dbmxczz2/data/reports/validation_20260324044212_0fb3c5d4.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_2_structural_defects_dbmxczz2/data/reports/validation_20260324044212_0fb3c5d4.md",
+      "judge": {
+        "score": 4.0,
+        "strengths": [],
+        "misses": [
+          "Primary failed checks do not include 'account:leaf_flag_consistency' as expected"
+        ],
+        "reason": "Overall pass/fail status matches expectation, but primary failed checks and key row-level members/issues do not fully match expectations.",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_3_hcm_numeric_mismatch",
+      "title": "HCM numeric mismatch",
+      "ingestion_warnings": [],
+      "rag_document_count": 23,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 8,
+        "passed_checks": 7,
+        "failed_checks": 1,
+        "failed_records": 2
+      },
+      "dimensions": [
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "entity:numeric_value_match"
+      ],
+      "actual_members": [
+        "entity=GlobalCorp, business_unit=Corporate Services, department=Finance Ops, cost_center=Payroll Control",
+        "entity=GlobalCorp, business_unit=Corporate Services, department=People Ops, cost_center=Talent Acquisition"
+      ],
+      "agent_explanation": "### What Was Tested\n- Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Numeric value match\n\n### What Failed\n- Entity - Numeric value match (2 failed records)\n- 1 failed checks were recorded and 2 records were flagged.\n\n### Likely Cause\n- Numeric measure data differs between source and target, which usually points to an aggregation, currency, or row-level load mismatch.\n\n### Recommended Action\n- Compare source and target measure rows on the shared business keys, then reconcile any mismatched numeric values or missing measure rows.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_3_hcm_numeric_mismatch_df69owin/data/reports/validation_20260324044233_f31187cf.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_3_hcm_numeric_mismatch_df69owin/data/reports/validation_20260324044233_f31187cf.md",
+      "judge": {
+        "score": 2.0,
+        "strengths": null,
+        "misses": [
+          "Primary failed checks do not match expectation (should have more fails)"
+        ],
+        "reason": "Key row-level members/issues partially match expectation, but primary failed checks and explanation quality do not fully align with expected outcomes.",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_4_mapping_gap_only",
+      "title": "Mapping completeness gap",
+      "ingestion_warnings": [],
+      "rag_document_count": 69,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 17,
+        "passed_checks": 15,
+        "failed_checks": 2,
+        "failed_records": 2
+      },
+      "dimensions": [
+        "account",
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "account:mapping_completeness",
+        "entity:mapping_completeness"
+      ],
+      "actual_members": [
+        "Germany_BU",
+        "License_Rev"
+      ],
+      "agent_explanation": "### What Was Tested\n- Account - Missing members in target, Account - Parent existence, Account - Source parent vs target parent mismatch, Account - Duplicate members, Account - Leaf/non-leaf consistency, Account - Level consistency, Account - Row-level hierarchy match, Account - Mapping completeness, Account - Rollup preservation, Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Mapping completeness\n\n### What Failed\n- Account - Mapping completeness (1 failed records), Entity - Mapping completeness (1 failed records)\n- 2 failed checks were recorded and 2 records were flagged.\n\n### Likely Cause\n- The mapping workbook or curated mapping table is incomplete for one or more source members.\n\n### Recommended Action\n- Add the missing mapping records and re-run the migration validation.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_4_mapping_gap_only_94at35na/data/reports/validation_20260324044252_fab24455.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_4_mapping_gap_only_94at35na/data/reports/validation_20260324044252_fab24455.md",
+      "judge": {
+        "score": 6.0,
+        "strengths": null,
+        "misses": [
+          "Explanation could be clearer",
+          "More detailed information about failed checks"
+        ],
+        "reason": "Overall pass/fail status matches expectation. Primary failed checks match expectation, but key row-level members/issues don't fully align with the actual reason for failure (incomplete mapping workbooks or curated mapping tables). Explanation quality is somewhat useful, but could be improved to provide more insight into the cause of the issue.",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_5_title_row_edge_case",
+      "title": "Title-row edge case",
+      "ingestion_warnings": [],
+      "rag_document_count": 28,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 7,
+        "passed_checks": 6,
+        "failed_checks": 1,
+        "failed_records": 3
+      },
+      "dimensions": [
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "entity:row_level_match"
+      ],
+      "actual_members": [
+        "APAC",
+        "Finance Ops",
+        "Operations"
+      ],
+      "agent_explanation": "### What Was Tested\n- Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match\n\n### What Failed\n- Entity - Row-level hierarchy match (3 failed records)\n- 1 failed checks were recorded and 3 records were flagged.\n\n### Likely Cause\n- The normalized source and target hierarchy rows do not align, which usually points to sheet-selection, normalization, or load logic drift.\n\n### Recommended Action\n- Compare normalized source and target rows side by side and reconcile any missing, extra, or structurally different hierarchy rows.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_5_title_row_edge_case_yq0srajz/data/reports/validation_20260324044307_26a13c9b.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_5_title_row_edge_case_yq0srajz/data/reports/validation_20260324044307_26a13c9b.md",
+      "judge": {
+        "score": 4.0,
+        "strengths": [
+          "passing the overall pass/fail status expectation"
+        ],
+        "misses": [
+          "missing detailed explanation of primary failed checks",
+          "missing clear summary of failed records"
+        ],
+        "reason": "The case passed the overall pass/fail status expectation but could benefit from a more detailed explanation of the primary failed checks and a clearer summary of the failed records.",
+        "judge_method": "ollama"
+      }
+    }
+  ],
+  "aggregate": {
+    "cases_run": 5,
+    "total_score": 20.0,
+    "max_score": 50,
+    "accuracy_percentage": 40.0
+  }
+}

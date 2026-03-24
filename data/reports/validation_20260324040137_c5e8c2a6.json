@@ -1,0 +1,278 @@
+{
+  "run_id": "validation_20260324040137_c5e8c2a6",
+  "created_at": "2026-03-24T04:01:37.482516Z",
+  "request": "Validate the uploaded source hierarchy workbook against the uploaded target hierarchy workbook",
+  "overall_status": "FAILED",
+  "dimensions": [
+    "entity"
+  ],
+  "summary": {
+    "total_checks": 8,
+    "passed_checks": 7,
+    "failed_checks": 1,
+    "failed_records": 11
+  },
+  "results": [
+    {
+      "rule_id": "ENTITY_001",
+      "rule_name": "Missing members in target",
+      "check_type": "missing_members_in_target",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "PASSED",
+      "passed_count": 47,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_002",
+      "rule_name": "Parent existence",
+      "check_type": "parent_existence",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "PASSED",
+      "passed_count": 47,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_003",
+      "rule_name": "Source parent vs target parent mismatch",
+      "check_type": "parent_mismatch",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "PASSED",
+      "passed_count": 39,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_004",
+      "rule_name": "Duplicate members",
+      "check_type": "duplicate_members",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "PASSED",
+      "passed_count": 47,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_005",
+      "rule_name": "Leaf/non-leaf consistency",
+      "check_type": "leaf_flag_consistency",
+      "dimension": "entity",
+      "severity": "medium",
+      "status": "PASSED",
+      "passed_count": 39,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_006",
+      "rule_name": "Level consistency",
+      "check_type": "level_consistency",
+      "dimension": "entity",
+      "severity": "medium",
+      "status": "PASSED",
+      "passed_count": 71,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_007",
+      "rule_name": "Row-level hierarchy match",
+      "check_type": "row_level_match",
+      "dimension": "entity",
+      "severity": "medium",
+      "status": "PASSED",
+      "passed_count": 47,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_008",
+      "rule_name": "Numeric value match",
+      "check_type": "numeric_value_match",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "FAILED",
+      "passed_count": 2359,
+      "failed_count": 11,
+      "failed_records": [
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_APAC, legal_entity=Asteron India Pvt Ltd, company_code=IN01, region=APAC, division=Corporate Services, function=Finance Ops, team=Payroll Control, location_city=Toronto, location_code=TOR01, worker_id=W40076, worker_name=Noah Scott, worker_type=Employee, employment_category=Permanent, job_family=Payroll Control, job_title=Payroll Analyst, grade_band=P2, pay_basis=Salary, currency=INR, supervisor_id=S805, supervisor_name=Mia Lee, cost_center=CC-IN01-856, project_code=PRJ-DV-822, hire_date=2022-06-11 00:00:00, last_promotion_date=2025-09-17 00:00:00, performance_rating=Needs Support, attrition_risk=Low, remote_pattern=Hybrid, snapshot_timestamp=2026-03-15 02:14:33, record_status=Open",
+          "issue": "Numeric column 'annual_salary_local' differs between source and target",
+          "source_value": "77309.0",
+          "target_value": "77310.0",
+          "details": {
+            "dataset_name": "workforce_fact_grid",
+            "measure_column": "annual_salary_local"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_APAC, legal_entity=Asteron India Pvt Ltd, company_code=IN01, region=APAC, division=Technology, function=Enterprise Platforms, team=Identity Access, location_city=Singapore, location_code=SGP01, worker_id=W40082, worker_name=Harper Rossi, worker_type=Employee, employment_category=Intern, job_family=Identity Access, job_title=Security Engineer, grade_band=P3, pay_basis=Hourly, currency=INR, supervisor_id=S812, supervisor_name=Harper Lee, cost_center=CC-IN01-644, project_code=PRJ-TR-547, hire_date=2019-07-19 00:00:00, last_promotion_date=2024-03-10 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=Y, snapshot_timestamp=2026-03-14 22:13:16, record_status=Open",
+          "issue": "Target workbook contains an extra measure row in dataset 'workforce_fact_grid'",
+          "source_value": null,
+          "target_value": "ledger=CORP_APAC, legal_entity=Asteron India Pvt Ltd, company_code=IN01, region=APAC, division=Technology, function=Enterprise Platforms, team=Identity Access, location_city=Singapore, location_code=SGP01, worker_id=W40082, worker_name=Harper Rossi, worker_type=Employee, employment_category=Intern, job_family=Identity Access, job_title=Security Engineer, grade_band=P3, pay_basis=Hourly, currency=INR, supervisor_id=S812, supervisor_name=Harper Lee, cost_center=CC-IN01-644, project_code=PRJ-TR-547, hire_date=2019-07-19 00:00:00, last_promotion_date=2024-03-10 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=Y, snapshot_timestamp=2026-03-14 22:13:16, record_status=Open",
+          "details": {
+            "dataset_name": "workforce_fact_grid"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_APAC, legal_entity=Asteron India Pvt Ltd, company_code=IN01, region=APAC, division=Technology, function=Enterprise Platforms, team=Identity Access, location_city=Singapore, location_code=SGP01, worker_id=W40082, worker_name=Harper Rossi, worker_type=Employee, employment_category=Intern, job_family=Identity Access, job_title=Security Engineer, grade_band=P3, pay_basis=Hourly, currency=INR, supervisor_id=S812, supervisor_name=Harper Lee, project_code=PRJ-TR-547, hire_date=2019-07-19 00:00:00, last_promotion_date=2024-03-10 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=Y, snapshot_timestamp=2026-03-14 22:13:16, record_status=Open",
+          "issue": "Measure row from dataset 'workforce_fact_grid' is missing from the target workbook",
+          "source_value": "ledger=CORP_APAC, legal_entity=Asteron India Pvt Ltd, company_code=IN01, region=APAC, division=Technology, function=Enterprise Platforms, team=Identity Access, location_city=Singapore, location_code=SGP01, worker_id=W40082, worker_name=Harper Rossi, worker_type=Employee, employment_category=Intern, job_family=Identity Access, job_title=Security Engineer, grade_band=P3, pay_basis=Hourly, currency=INR, supervisor_id=S812, supervisor_name=Harper Lee, project_code=PRJ-TR-547, hire_date=2019-07-19 00:00:00, last_promotion_date=2024-03-10 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=Y, snapshot_timestamp=2026-03-14 22:13:16, record_status=Open",
+          "target_value": null,
+          "details": {
+            "dataset_name": "workforce_fact_grid"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_EMEA, legal_entity=Asteron Europe GmbH, company_code=DE01, region=EMEA, division=Technology, function=Enterprise Platforms, team=Identity Access, location_city=London, location_code=LDN01, worker_id=W40018, worker_name=Henry Scott, worker_type=Employee, employment_category=Permanent, job_family=Identity Access, job_title=IAM Analyst, grade_band=P2, pay_basis=Salary, currency=EUR, supervisor_id=S805, supervisor_name=Scarlett Rivera, cost_center=CC-DE01-218, project_code=PRJ-TR-596, hire_date=2019-03-16 00:00:00, last_promotion_date=2023-09-09 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=N, snapshot_timestamp=2026-03-12 15:58:31, record_status=Open",
+          "issue": "Numeric column 'annualized_comp_local' differs between source and target",
+          "source_value": "54792.0",
+          "target_value": "54852.0",
+          "details": {
+            "dataset_name": "workforce_fact_grid",
+            "measure_column": "annualized_comp_local"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_US, legal_entity=Asteron Holdings Canada, company_code=CA01, region=Americas, division=Commercial, function=Customer Success, team=Support Excellence, location_city=Singapore, location_code=SGP01, worker_id=W40023, worker_name=Chloe Evans, worker_type=Employee, employment_category=Permanent, job_family=Support Excellence, job_title=Support Manager, grade_band=M1, pay_basis=Salary, currency=CAD, supervisor_id=S811, supervisor_name=Mia Turner, cost_center=CC-CA01-465, project_code=PRJ-TR-721, hire_date=2023-05-19 00:00:00, last_promotion_date=2025-03-21 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=N, snapshot_timestamp=2026-03-01 15:51:23, record_status=Closed",
+          "issue": "Numeric column 'annual_salary_local' differs between source and target",
+          "source_value": "156002.0",
+          "target_value": "312004.0",
+          "details": {
+            "dataset_name": "workforce_fact_grid",
+            "measure_column": "annual_salary_local"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_US, legal_entity=Asteron Holdings Canada, company_code=CA01, region=Americas, division=Commercial, function=Customer Success, team=Support Excellence, location_city=Singapore, location_code=SGP01, worker_id=W40023, worker_name=Chloe Evans, worker_type=Employee, employment_category=Permanent, job_family=Support Excellence, job_title=Support Manager, grade_band=M1, pay_basis=Salary, currency=CAD, supervisor_id=S811, supervisor_name=Mia Turner, cost_center=CC-CA01-465, project_code=PRJ-TR-721, hire_date=2023-05-19 00:00:00, last_promotion_date=2025-03-21 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=N, snapshot_timestamp=2026-03-01 15:51:23, record_status=Closed",
+          "issue": "Numeric column 'annualized_comp_local' differs between source and target",
+          "source_value": "156002.0",
+          "target_value": "311104.0",
+          "details": {
+            "dataset_name": "workforce_fact_grid",
+            "measure_column": "annualized_comp_local"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_US, legal_entity=Asteron Holdings Canada, company_code=CA01, region=Americas, division=Commercial, function=Customer Success, team=Support Excellence, location_city=Singapore, location_code=SGP01, worker_id=W40023, worker_name=Chloe Evans, worker_type=Employee, employment_category=Permanent, job_family=Support Excellence, job_title=Support Manager, grade_band=M1, pay_basis=Salary, currency=CAD, supervisor_id=S811, supervisor_name=Mia Turner, cost_center=CC-CA01-465, project_code=PRJ-TR-721, hire_date=2023-05-19 00:00:00, last_promotion_date=2025-03-21 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=N, snapshot_timestamp=2026-03-01 15:51:23, record_status=Closed",
+          "issue": "Numeric column 'bonus_target' differs between source and target",
+          "source_value": "0.18",
+          "target_value": "0.36",
+          "details": {
+            "dataset_name": "workforce_fact_grid",
+            "measure_column": "bonus_target"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_US, legal_entity=Asteron Holdings Canada, company_code=CA01, region=Americas, division=Commercial, function=Customer Success, team=Support Excellence, location_city=Singapore, location_code=SGP01, worker_id=W40023, worker_name=Chloe Evans, worker_type=Employee, employment_category=Permanent, job_family=Support Excellence, job_title=Support Manager, grade_band=M1, pay_basis=Salary, currency=CAD, supervisor_id=S811, supervisor_name=Mia Turner, cost_center=CC-CA01-465, project_code=PRJ-TR-721, hire_date=2023-05-19 00:00:00, last_promotion_date=2025-03-21 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=N, snapshot_timestamp=2026-03-01 15:51:23, record_status=Closed",
+          "issue": "Numeric column 'fte' differs between source and target",
+          "source_value": "1.0",
+          "target_value": "2.0",
+          "details": {
+            "dataset_name": "workforce_fact_grid",
+            "measure_column": "fte"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_US, legal_entity=Asteron Holdings Canada, company_code=CA01, region=Americas, division=Technology, function=Enterprise Platforms, team=ERP Engineering, location_city=Bengaluru, location_code=BLR01, worker_id=W40141, worker_name=Nora Wright, worker_type=Employee, employment_category=Permanent, job_family=ERP Engineering, job_title=ERP Analyst, grade_band=P2, pay_basis=Salary, currency=CAD, supervisor_id=S801, supervisor_name=Henry Wright, cost_center=CC-CA01-440, project_code=PRJ-TR-167, hire_date=2023-12-11 00:00:00, last_promotion_date=2026-02-28 00:00:00, performance_rating=Solid, attrition_risk=Low, remote_pattern=N, snapshot_timestamp=2026-03-14 06:05:10, record_status=Open",
+          "issue": "Numeric column 'annual_salary_local' differs between source and target",
+          "source_value": "76836.0",
+          "target_value": "64836.0",
+          "details": {
+            "dataset_name": "workforce_fact_grid",
+            "measure_column": "annual_salary_local"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_US, legal_entity=Asteron Holdings US, company_code=US01, region=Americas, division=Transformation, function=Strategy, team=M&A Integration, location_city=Toronto, location_code=TOR01, worker_id=W40085, worker_name=Mason Scott, worker_type=Employee, employment_category=Contractor, job_family=M&A Integration, job_title=Transformation Consultant, grade_band=P3, pay_basis=Salary, currency=USD, supervisor_id=S816, supervisor_name=Zoey Rossi, cost_center=CC-US01-258, project_code=PRJ-TR-814, hire_date=2022-05-08 00:00:00, last_promotion_date=2024-12-31 00:00:00, performance_rating=Strong, attrition_risk=Moderate, remote_pattern=N, snapshot_timestamp=2026-03-06 16:53:17, record_status=Pending Sync",
+          "issue": "Measure row from dataset 'workforce_fact_grid' is missing from the target workbook",
+          "source_value": "ledger=CORP_US, legal_entity=Asteron Holdings US, company_code=US01, region=Americas, division=Transformation, function=Strategy, team=M&A Integration, location_city=Toronto, location_code=TOR01, worker_id=W40085, worker_name=Mason Scott, worker_type=Employee, employment_category=Contractor, job_family=M&A Integration, job_title=Transformation Consultant, grade_band=P3, pay_basis=Salary, currency=USD, supervisor_id=S816, supervisor_name=Zoey Rossi, cost_center=CC-US01-258, project_code=PRJ-TR-814, hire_date=2022-05-08 00:00:00, last_promotion_date=2024-12-31 00:00:00, performance_rating=Strong, attrition_risk=Moderate, remote_pattern=N, snapshot_timestamp=2026-03-06 16:53:17, record_status=Pending Sync",
+          "target_value": null,
+          "details": {
+            "dataset_name": "workforce_fact_grid"
+          }
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "ledger=CORP_US, legal_entity=Asteron Holdings US, company_code=US01, region=Americas, division=Transformation, function=Strategy, team=M&A Integration, location_city=Toronto, location_code=TOR01, worker_id=W40085, worker_name=Mason Scott, worker_type=Employee, employment_category=Permanent, job_family=M&A Integration, job_title=Transformation Consultant, grade_band=P3, pay_basis=Salary, currency=USD, supervisor_id=S816, supervisor_name=Zoey Rossi, cost_center=CC-US01-258, project_code=PRJ-TR-814, hire_date=2022-05-08 00:00:00, last_promotion_date=2024-12-31 00:00:00, performance_rating=Strong, attrition_risk=Moderate, remote_pattern=N, snapshot_timestamp=2026-03-06 16:53:17, record_status=Pending Sync",
+          "issue": "Target workbook contains an extra measure row in dataset 'workforce_fact_grid'",
+          "source_value": null,
+          "target_value": "ledger=CORP_US, legal_entity=Asteron Holdings US, company_code=US01, region=Americas, division=Transformation, function=Strategy, team=M&A Integration, location_city=Toronto, location_code=TOR01, worker_id=W40085, worker_name=Mason Scott, worker_type=Employee, employment_category=Permanent, job_family=M&A Integration, job_title=Transformation Consultant, grade_band=P3, pay_basis=Salary, currency=USD, supervisor_id=S816, supervisor_name=Zoey Rossi, cost_center=CC-US01-258, project_code=PRJ-TR-814, hire_date=2022-05-08 00:00:00, last_promotion_date=2024-12-31 00:00:00, performance_rating=Strong, attrition_risk=Moderate, remote_pattern=N, snapshot_timestamp=2026-03-06 16:53:17, record_status=Pending Sync",
+          "details": {
+            "dataset_name": "workforce_fact_grid"
+          }
+        }
+      ],
+      "retrieved_context": [
+        "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+      ],
+      "likely_cause": "Numeric measure data differs between source and target, which usually points to an aggregation, currency, or row-level load mismatch.",
+      "recommended_action": "Compare source and target measure rows on the shared business keys, then reconcile any mismatched numeric values or missing measure rows."
+    }
+  ],
+  "retrieved_context": [
+    "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+    "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+    "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+    "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+  ],
+  "likely_root_causes": [
+    "Numeric measure data differs between source and target, which usually points to an aggregation, currency, or row-level load mismatch."
+  ],
+  "recommended_actions": [
+    "Compare source and target measure rows on the shared business keys, then reconcile any mismatched numeric values or missing measure rows."
+  ],
+  "agent_explanation": "### What Was Tested\n- Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Numeric value match\n\n### What Failed\n- Entity - Numeric value match (11 failed records)\n- 1 failed checks were recorded and 11 records were flagged.\n\n### Likely Cause\n- Numeric measure data differs between source and target, which usually points to an aggregation, currency, or row-level load mismatch.\n\n### Recommended Action\n- Compare source and target measure rows on the shared business keys, then reconcile any mismatched numeric values or missing measure rows.",
+  "json_report_path": "/Users/beshvigneshreddy/Desktop/DataMigrationAgent/data/reports/validation_20260324040137_c5e8c2a6.json",
+  "markdown_report_path": "/Users/beshvigneshreddy/Desktop/DataMigrationAgent/data/reports/validation_20260324040137_c5e8c2a6.md"
+}

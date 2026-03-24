@@ -1,0 +1,947 @@
+{
+  "run_id": "validation_20260324044837_90a88f82",
+  "created_at": "2026-03-24T04:48:37.942350Z",
+  "request": "Validate the uploaded source hierarchy workbook against the uploaded target hierarchy workbook",
+  "overall_status": "FAILED",
+  "dimensions": [
+    "entity"
+  ],
+  "summary": {
+    "total_checks": 8,
+    "passed_checks": 3,
+    "failed_checks": 5,
+    "failed_records": 85
+  },
+  "results": [
+    {
+      "rule_id": "ENTITY_001",
+      "rule_name": "Missing members in target",
+      "check_type": "missing_members_in_target",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "FAILED",
+      "passed_count": 1,
+      "failed_count": 15,
+      "failed_records": [
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "GlobalCorp",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "GlobalCorp",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "Europe",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "Europe",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "Legal",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "Legal",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "LEG210",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "LEG210",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "HR",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "HR",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "HR200",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "HR200",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "North America",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "North America",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "Sales",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "Sales",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "SAL110",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "SAL110",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "Finance",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "Finance",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "FIN100",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "FIN100",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "Support",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "Support",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "SUP310",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "SUP310",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "IT",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "IT",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Missing members in target",
+          "member_name": "IT300",
+          "issue": "Source member missing from target hierarchy",
+          "source_value": "IT300",
+          "target_value": null,
+          "details": {}
+        }
+      ],
+      "retrieved_context": [
+        "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+      ],
+      "likely_cause": "The target load likely filtered out valid source members or the curated insert step missed a subset of records.",
+      "recommended_action": "Re-run the target load for the missing members and review any filters applied during normalization."
+    },
+    {
+      "rule_id": "ENTITY_002",
+      "rule_name": "Parent existence",
+      "check_type": "parent_existence",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "PASSED",
+      "passed_count": 47,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_003",
+      "rule_name": "Source parent vs target parent mismatch",
+      "check_type": "parent_mismatch",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "FAILED",
+      "passed_count": 0,
+      "failed_count": 1,
+      "failed_records": [
+        {
+          "dimension": "entity",
+          "rule_name": "Source parent vs target parent mismatch",
+          "member_name": "APAC",
+          "issue": "Source parent differs from target parent",
+          "source_value": "GlobalCorp",
+          "target_value": null,
+          "details": {}
+        }
+      ],
+      "retrieved_context": [
+        "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+      ],
+      "likely_cause": "The parent-child remapping logic is likely outdated relative to the Smart View source hierarchy.",
+      "recommended_action": "Compare the mapping logic to the current source hierarchy and correct the parent remap rules."
+    },
+    {
+      "rule_id": "ENTITY_004",
+      "rule_name": "Duplicate members",
+      "check_type": "duplicate_members",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "PASSED",
+      "passed_count": 47,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_005",
+      "rule_name": "Leaf/non-leaf consistency",
+      "check_type": "leaf_flag_consistency",
+      "dimension": "entity",
+      "severity": "medium",
+      "status": "PASSED",
+      "passed_count": 1,
+      "failed_count": 0,
+      "failed_records": [],
+      "retrieved_context": [],
+      "likely_cause": "",
+      "recommended_action": ""
+    },
+    {
+      "rule_id": "ENTITY_006",
+      "rule_name": "Level consistency",
+      "check_type": "level_consistency",
+      "dimension": "entity",
+      "severity": "medium",
+      "status": "FAILED",
+      "passed_count": 0,
+      "failed_count": 1,
+      "failed_records": [
+        {
+          "dimension": "entity",
+          "rule_name": "Level consistency",
+          "member_name": "APAC",
+          "issue": "Source level differs from target level",
+          "source_value": "1",
+          "target_value": "0",
+          "details": {}
+        }
+      ],
+      "retrieved_context": [
+        "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+      ],
+      "likely_cause": "Hierarchy depth appears to have been recalculated incorrectly during normalization or flattening.",
+      "recommended_action": "Recalculate hierarchy levels from the resolved parent-child structure during normalization."
+    },
+    {
+      "rule_id": "ENTITY_007",
+      "rule_name": "Row-level hierarchy match",
+      "check_type": "row_level_match",
+      "dimension": "entity",
+      "severity": "medium",
+      "status": "FAILED",
+      "passed_count": 0,
+      "failed_count": 63,
+      "failed_records": [
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "APAC",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=GlobalCorp, level=1, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Europe",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=GlobalCorp, level=1, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "FIN100",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=Finance, level=3, leaf_flag=True",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Finance",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=North America, level=2, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "GlobalCorp",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=ROOT, level=0, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "HR",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=Europe, level=2, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "HR200",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=HR, level=3, leaf_flag=True",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "IT",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=APAC, level=2, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "IT300",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=IT, level=3, leaf_flag=True",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "LEG210",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=Legal, level=3, leaf_flag=True",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Legal",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=Europe, level=2, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "North America",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=GlobalCorp, level=1, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "SAL110",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=Sales, level=3, leaf_flag=True",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "SUP310",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=Support, level=3, leaf_flag=True",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Sales",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=North America, level=2, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Support",
+          "issue": "Normalized source row is missing from the target hierarchy",
+          "source_value": "parent=APAC, level=2, leaf_flag=False",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "APAC",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=ROOT, level=0, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Americas",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=ROOT, level=0, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Business Readiness",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=PMO, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Change Management",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=PMO, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Channel Analytics",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Revenue Operations, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Commercial",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=APAC, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Commercial",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Americas, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Commercial",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=EMEA, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Core Apps",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Product Engineering, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Corporate Services",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=APAC, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Corporate Services",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Americas, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Corporate Services",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=EMEA, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Customer Success",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Commercial, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Data Platforms",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Enterprise Platforms, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Deal Desk",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Revenue Operations, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Delivery Governance",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=PMO, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "EMEA",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=ROOT, level=0, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "ERP Engineering",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Enterprise Platforms, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Enterprise Platforms",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Technology, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "FP&A Center",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Finance Ops, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Field Sales Support",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Revenue Operations, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Finance Ops",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Corporate Services, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "GL Accounting",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Finance Ops, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "HR Shared Services",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=People Operations, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Identity Access",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Enterprise Platforms, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Integrations",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Product Engineering, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "M&A Integration",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Strategy, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Onboarding",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Customer Success, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Operating Model",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Strategy, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "PMO",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Transformation, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Payroll Control",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Finance Ops, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "People Operations",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Corporate Services, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Process Excellence",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Strategy, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Product Engineering",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Technology, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "QA Automation",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Product Engineering, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Renewals",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Customer Success, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Revenue Operations",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Commercial, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Strategy",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Transformation, level=2, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Support Excellence",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Customer Success, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Talent Acquisition",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=People Operations, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Technology",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=APAC, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Technology",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Americas, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Technology",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=EMEA, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Total Rewards",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=People Operations, level=3, leaf_flag=True",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Transformation",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=APAC, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Transformation",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=Americas, level=1, leaf_flag=False",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Row-level hierarchy match",
+          "member_name": "Transformation",
+          "issue": "Target contains a normalized row not found in the source hierarchy",
+          "source_value": null,
+          "target_value": "parent=EMEA, level=1, leaf_flag=False",
+          "details": {}
+        }
+      ],
+      "retrieved_context": [
+        "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+      ],
+      "likely_cause": "The normalized source and target hierarchy rows do not align, which usually points to sheet-selection, normalization, or load logic drift.",
+      "recommended_action": "Compare normalized source and target rows side by side and reconcile any missing, extra, or structurally different hierarchy rows."
+    },
+    {
+      "rule_id": "ENTITY_008",
+      "rule_name": "Numeric value match",
+      "check_type": "numeric_value_match",
+      "dimension": "entity",
+      "severity": "high",
+      "status": "FAILED",
+      "passed_count": 0,
+      "failed_count": 5,
+      "failed_records": [
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "compensation_cube",
+          "issue": "Target measure dataset has no matching source dataset",
+          "source_value": null,
+          "target_value": "compensation_cube",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "hcm_employee_data",
+          "issue": "Source measure dataset is missing from the target workbook",
+          "source_value": "hcm_employee_data",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "smartview_report",
+          "issue": "Source measure dataset is missing from the target workbook",
+          "source_value": "smartview_report",
+          "target_value": null,
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "snapshot_dashboard",
+          "issue": "Target measure dataset has no matching source dataset",
+          "source_value": null,
+          "target_value": "snapshot_dashboard",
+          "details": {}
+        },
+        {
+          "dimension": "entity",
+          "rule_name": "Numeric value match",
+          "member_name": "workforce_fact_grid",
+          "issue": "Target measure dataset has no matching source dataset",
+          "source_value": null,
+          "target_value": "workforce_fact_grid",
+          "details": {}
+        }
+      ],
+      "retrieved_context": [
+        "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+        "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+      ],
+      "likely_cause": "Numeric measure data differs between source and target, which usually points to an aggregation, currency, or row-level load mismatch.",
+      "recommended_action": "Compare source and target measure rows on the shared business keys, then reconcile any mismatched numeric values or missing measure rows."
+    }
+  ],
+  "retrieved_context": [
+    "Validation rule for entity: Row-level hierarchy match. Check type row_level_match. Description: Normalized hierarchy rows should match exactly between source and target.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+    "Validation rule for entity: Mapping completeness. Check type mapping_completeness. Description: Every source member must have a valid mapping record before migration is accepted.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+    "Validation rule for entity: Level consistency. Check type level_consistency. Description: Hierarchy levels must remain consistent after normalization.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering..",
+    "Validation rule for entity: Source parent vs target parent mismatch. Check type parent_mismatch. Description: Target parent-child relationships must match the Smart View source extract.. Business rationale: Entity hierarchy reconciliation should stay transparent and explainable for business users and data engineering.."
+  ],
+  "likely_root_causes": [
+    "The target load likely filtered out valid source members or the curated insert step missed a subset of records.",
+    "The parent-child remapping logic is likely outdated relative to the Smart View source hierarchy.",
+    "Hierarchy depth appears to have been recalculated incorrectly during normalization or flattening.",
+    "The normalized source and target hierarchy rows do not align, which usually points to sheet-selection, normalization, or load logic drift.",
+    "Numeric measure data differs between source and target, which usually points to an aggregation, currency, or row-level load mismatch."
+  ],
+  "recommended_actions": [
+    "Re-run the target load for the missing members and review any filters applied during normalization.",
+    "Compare the mapping logic to the current source hierarchy and correct the parent remap rules.",
+    "Recalculate hierarchy levels from the resolved parent-child structure during normalization.",
+    "Compare normalized source and target rows side by side and reconcile any missing, extra, or structurally different hierarchy rows.",
+    "Compare source and target measure rows on the shared business keys, then reconcile any mismatched numeric values or missing measure rows."
+  ],
+  "agent_explanation": "### What Was Tested\n- Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Numeric value match\n\n### What Failed\n- Entity - Missing members in target (15 failed records), Entity - Source parent vs target parent mismatch (1 failed records), Entity - Level consistency (1 failed records), Entity - Row-level hierarchy match (63 failed records)\n- 5 failed checks were recorded and 85 records were flagged.\n\n### Likely Cause\n- The target load likely filtered out valid source members or the curated insert step missed a subset of records., The parent-child remapping logic is likely outdated relative to the Smart View source hierarchy., Hierarchy depth appears to have been recalculated incorrectly during normalization or flattening.\n\n### Recommended Action\n- Re-run the target load for the missing members and review any filters applied during normalization., Compare the mapping logic to the current source hierarchy and correct the parent remap rules., Recalculate hierarchy levels from the resolved parent-child structure during normalization.",
+  "json_report_path": "/Users/beshvigneshreddy/Desktop/DataMigrationAgent/data/reports/validation_20260324044837_90a88f82.json",
+  "markdown_report_path": "/Users/beshvigneshreddy/Desktop/DataMigrationAgent/data/reports/validation_20260324044837_90a88f82.md"
+}

@@ -1,0 +1,204 @@
+{
+  "generated_at": "2026-03-23T23:47:24.200911",
+  "judge_mode_requested": "auto",
+  "judge_mode_used": "ollama",
+  "embedding_mode": "deterministic_dummy_for_reproducible_eval",
+  "cases": [
+    {
+      "name": "case_1_happy_path_multi_hierarchy",
+      "title": "Happy path multi-hierarchy",
+      "ingestion_warnings": [],
+      "rag_document_count": 75,
+      "overall_status": "PASSED",
+      "summary": {
+        "total_checks": 18,
+        "passed_checks": 18,
+        "failed_checks": 0,
+        "failed_records": 0
+      },
+      "dimensions": [
+        "account",
+        "entity"
+      ],
+      "actual_rule_keys": [],
+      "actual_members": [],
+      "agent_explanation": "**Finance Hierarchy Migration Validation Run Report**\n=====================================================\n\n### What Was Tested\nThe validation run tested the upload of source and target hierarchy workbooks across account and entity hierarchies.\n\n### What Failed or Passed\n#### Test Results:\n\n| Test Case | Pass/Fail |\n| --- | --- |\n| Source Account Hierarchy Validation | **Passed** |\n| Target Account Hierarchy Validation | **Passed** |\n| Entity Hierarchy Validation | **Passed** |\n\n### Likely Cause\nNo failures were reported in this validation run.\n\n### Recommended Action\n\nSince no failures were reported, no further action is required. However, to ensure the accuracy of the hierarchy data, it's recommended to:\n\n* Review and verify the uploaded source and target hierarchies manually.\n* Perform a dry-run test with sample data before applying any changes to production.\n\nNo next actions are necessary as there were no failures reported in this validation run.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_1_happy_path_multi_hierarchy_8h2oo2m8/data/reports/validation_20260324044619_cd4cb77c.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_1_happy_path_multi_hierarchy_8h2oo2m8/data/reports/validation_20260324044619_cd4cb77c.md",
+      "judge": {
+        "score": 4.0,
+        "strengths": [
+          "Passed all checks",
+          "Detailed explanation provided"
+        ],
+        "misses": [],
+        "reason": "The actual output matches the expected result, with a total of 18 checks passed and no failed records or checks. The explanation is detailed and business-friendly.",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_2_structural_defects",
+      "title": "Structural defect mix",
+      "ingestion_warnings": [],
+      "rag_document_count": 70,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 17,
+        "passed_checks": 8,
+        "failed_checks": 9,
+        "failed_records": 16
+      },
+      "dimensions": [
+        "account",
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "account:leaf_flag_consistency",
+        "account:level_consistency",
+        "account:missing_members_in_target",
+        "account:parent_mismatch",
+        "account:rollup_preservation",
+        "account:row_level_match",
+        "entity:parent_existence",
+        "entity:parent_mismatch",
+        "entity:row_level_match"
+      ],
+      "actual_members": [
+        "California_BU",
+        "License_Rev",
+        "Rent_Expense",
+        "Subscription_Rev",
+        "Total_Expense",
+        "Total_Revenue"
+      ],
+      "agent_explanation": "### What Was Tested\n- Account - Missing members in target, Account - Parent existence, Account - Source parent vs target parent mismatch, Account - Duplicate members, Account - Leaf/non-leaf consistency, Account - Level consistency, Account - Row-level hierarchy match, Account - Mapping completeness, Account - Rollup preservation, Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Mapping completeness\n\n### What Failed\n- Account - Missing members in target (1 failed records), Account - Source parent vs target parent mismatch (1 failed records), Account - Leaf/non-leaf consistency (1 failed records), Account - Level consistency (1 failed records)\n- 9 failed checks were recorded and 16 records were flagged.\n\n### Likely Cause\n- The target load likely filtered out valid source members or the curated insert step missed a subset of records., The parent-child remapping logic is likely outdated relative to the Smart View source hierarchy., Leaf flags appear to have been copied or derived incorrectly after parent-child relationships changed.\n\n### Recommended Action\n- Re-run the target load for the missing members and review any filters applied during normalization., Compare the mapping logic to the current source hierarchy and correct the parent remap rules., Recompute leaf indicators from the final hierarchy graph instead of preserving stale flags.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_2_structural_defects__9escaxu/data/reports/validation_20260324044629_b50d9b39.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_2_structural_defects__9escaxu/data/reports/validation_20260324044629_b50d9b39.md",
+      "judge": {
+        "score": 4.0,
+        "strengths": null,
+        "misses": null,
+        "reason": "Overall pass/fail status matches expectation",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_3_hcm_numeric_mismatch",
+      "title": "HCM numeric mismatch",
+      "ingestion_warnings": [],
+      "rag_document_count": 23,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 8,
+        "passed_checks": 7,
+        "failed_checks": 1,
+        "failed_records": 2
+      },
+      "dimensions": [
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "entity:numeric_value_match"
+      ],
+      "actual_members": [
+        "entity=GlobalCorp, business_unit=Corporate Services, department=Finance Ops, cost_center=Payroll Control",
+        "entity=GlobalCorp, business_unit=Corporate Services, department=People Ops, cost_center=Talent Acquisition"
+      ],
+      "agent_explanation": "**Finance Hierarchy Migration Validation Run Report**\n=====================================================\n\n### What Was Tested\nThe validation run tested the upload of source and target hierarchy workbooks across account and entity hierarchies.\n\n### What Failed or Passed\n| Rule | Failed Count | Likely Cause |\n| --- | --- | --- |\n| Numeric Value Match | 2 | Incorrect numeric values for headcount and total_salary in GlobalCorp |\n|  |  | Inconsistent leaf flag values between source and target hierarchies |\n\n### Summary of Failures for Business Users\n\nThere were two rule failures that need to be addressed:\n- **Headcount mismatch**: The headcount value is incorrect in the Payroll Control entity hierarchy. This may affect reports and analysis related to workforce management.\n- **Total salary discrepancy**: The total_salary value is inconsistent between GlobalCorp entities, which could impact financial planning and budgeting.\n\n### Passed or Failed Check Counts\n\n* Total passed: 8\n* Total failed: 2\n\n### Likely Root Causes\n\n1. Incorrect numeric values in the source hierarchy workbooks.\n2. Inconsistent leaf flag settings between source and target hierarchies.\n\n### Recommended Action\n\n1. **Review and correct** the source hierarchy workbooks to ensure accurate headcount and total_salary values.\n2. **Verify** leaf flag settings for all entity hierarchies to ensure consistency between source and target systems.\n3. **Re-run** validation tests after making necessary changes to ensure successful migration.\n\nNext Actions:\n- Review and correct source data\n- Verify leaf flag consistency\n- Re-run validation tests",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_3_hcm_numeric_mismatch_uhsaky5o/data/reports/validation_20260324044642_25d35601.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_3_hcm_numeric_mismatch_uhsaky5o/data/reports/validation_20260324044642_25d35601.md",
+      "judge": {
+        "score": 4.0,
+        "strengths": "",
+        "misses": [
+          "Summary",
+          "Likely Root Causes",
+          "Recommended Action"
+        ],
+        "reason": "Overall pass/fail status matches expectation. However, the explanation provided is detailed but lacks a clear conclusion and actionable steps for business users.",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_4_mapping_gap_only",
+      "title": "Mapping completeness gap",
+      "ingestion_warnings": [],
+      "rag_document_count": 69,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 17,
+        "passed_checks": 15,
+        "failed_checks": 2,
+        "failed_records": 2
+      },
+      "dimensions": [
+        "account",
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "account:mapping_completeness",
+        "entity:mapping_completeness"
+      ],
+      "actual_members": [
+        "Germany_BU",
+        "License_Rev"
+      ],
+      "agent_explanation": "### What Was Tested\n- Account - Missing members in target, Account - Parent existence, Account - Source parent vs target parent mismatch, Account - Duplicate members, Account - Leaf/non-leaf consistency, Account - Level consistency, Account - Row-level hierarchy match, Account - Mapping completeness, Account - Rollup preservation, Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match, Entity - Mapping completeness\n\n### What Failed\n- Account - Mapping completeness (1 failed records), Entity - Mapping completeness (1 failed records)\n- 2 failed checks were recorded and 2 records were flagged.\n\n### Likely Cause\n- The mapping workbook or curated mapping table is incomplete for one or more source members.\n\n### Recommended Action\n- Add the missing mapping records and re-run the migration validation.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_4_mapping_gap_only_19ohwy7c/data/reports/validation_20260324044656_64363a58.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_4_mapping_gap_only_19ohwy7c/data/reports/validation_20260324044656_64363a58.md",
+      "judge": {
+        "score": 3.0,
+        "strengths": null,
+        "misses": [
+          "primary failed checks do not match expectation"
+        ],
+        "reason": "Primary failed checks do not exactly match 'Mapping completeness' as the actual failed checks include \"Account - Parent existence\", \"Source parent vs target parent mismatch\", \"Duplicate members\", \"Leaf/non-leaf consistency\", \"Level consistency\", \"Row-level hierarchy match\", and also \"Rollup preservation\" which is not mentioned in expected result.",
+        "judge_method": "ollama"
+      }
+    },
+    {
+      "name": "case_5_title_row_edge_case",
+      "title": "Title-row edge case",
+      "ingestion_warnings": [],
+      "rag_document_count": 28,
+      "overall_status": "FAILED",
+      "summary": {
+        "total_checks": 7,
+        "passed_checks": 6,
+        "failed_checks": 1,
+        "failed_records": 3
+      },
+      "dimensions": [
+        "entity"
+      ],
+      "actual_rule_keys": [
+        "entity:row_level_match"
+      ],
+      "actual_members": [
+        "APAC",
+        "Finance Ops",
+        "Operations"
+      ],
+      "agent_explanation": "### What Was Tested\n- Entity - Missing members in target, Entity - Parent existence, Entity - Source parent vs target parent mismatch, Entity - Duplicate members, Entity - Leaf/non-leaf consistency, Entity - Level consistency, Entity - Row-level hierarchy match\n\n### What Failed\n- Entity - Row-level hierarchy match (3 failed records)\n- 1 failed checks were recorded and 3 records were flagged.\n\n### Likely Cause\n- The normalized source and target hierarchy rows do not align, which usually points to sheet-selection, normalization, or load logic drift.\n\n### Recommended Action\n- Compare normalized source and target rows side by side and reconcile any missing, extra, or structurally different hierarchy rows.",
+      "json_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_5_title_row_edge_case_s8rrrtty/data/reports/validation_20260324044710_532b8932.json",
+      "markdown_report_path": "/private/var/folders/r8/mzyxn3cx4sdb0_mv_2p1y7l80000gn/T/case_5_title_row_edge_case_s8rrrtty/data/reports/validation_20260324044710_532b8932.md",
+      "judge": {
+        "score": 4.0,
+        "strengths": [
+          "Overall pass/fail status matches expectation"
+        ],
+        "misses": [
+          "Primary failed checks do not match expectation"
+        ],
+        "reason": "The overall pass/fail status is correct. However, the primary failed checks and key row-level members/issues do not exactly match the expected output.",
+        "judge_method": "ollama"
+      }
+    }
+  ],
+  "aggregate": {
+    "cases_run": 5,
+    "total_score": 19.0,
+    "max_score": 50,
+    "accuracy_percentage": 38.0
+  }
+}
