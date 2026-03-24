@@ -1,6 +1,8 @@
 # AI Financial Data Validation Engine (Hierarchical and Row-Level)
 
-Production-style local MVP for validating Oracle Smart View hierarchy migrations into ADLS-style curated hierarchy tables. The project combines deterministic dataframe-based validation, lightweight RAG over business context, and an agent layer that produces explainable exception reports for finance and data engineering users.
+Built a deterministic validation engine that operates on structured hierarchy and measure data. For hierarchies, it validates structural integrity like parent-child relationships, level consistency, and leaf-node correctness. For numeric data, it validates both row-level matches and aggregated rollups. The key part is combining both — so it can detect not just value mismatches, but whether they’re caused by hierarchy issues.
+
+The system has three layers: ingestion, validation, and reasoning. Validation is fully deterministic to ensure correctness, while AI is used before validation to interpret business context and after validation to explain discrepancies.
 
 ## Repo Tree
 
@@ -105,18 +107,16 @@ python -m streamlit run src/hierarchy_migration_validation_agent/frontend/stream
 
 ## Demo Screenshots
 
-The README is set up to show the two main Streamlit demo views below. Place the screenshots at these paths to render them in GitHub:
-
-- `docs/images/demo-source-target-preview.png`
-- `docs/images/demo-validation-checks.png`
-
 ### Source And Target Preview
 
-![Source and target hierarchy preview](docs/images/demo-source-target-preview.png)
+<img width="2938" height="1650" alt="image" src="https://github.com/user-attachments/assets/7b29c7c4-90e5-43a9-821e-03eda9b61e8f" />
+
+
 
 ### Validation Checks And Row-Level Failures
 
-![Validation checks and row-level failures](docs/images/demo-validation-checks.png)
+<img width="2940" height="1638" alt="image" src="https://github.com/user-attachments/assets/44d12878-016c-44af-9df5-d881e2ce2ae0" />
+
 
 ### Start the API
 
@@ -129,13 +129,6 @@ python -m uvicorn hierarchy_migration_validation_agent.api.main:app --reload
 ```bash
 python -m streamlit run src/hierarchy_migration_validation_agent/frontend/streamlit_app.py
 ```
-
-The Streamlit app now uses two uploaders:
-
-- `Upload Source Workbook`
-- `Upload Target Workbook`
-
-There is no manual `Build RAG Index` step in the UI anymore. Ingestion automatically refreshes the index.
 
 ### Run the 5-Case Evaluation
 
