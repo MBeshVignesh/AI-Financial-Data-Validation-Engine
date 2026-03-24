@@ -9,8 +9,12 @@ Production-style local MVP for validating Oracle Smart View hierarchy migrations
 ├── .env.example
 ├── README.md
 ├── docs/
-│   └── architecture.md
+│   ├── architecture.md
+│   └── images/
 ├── pyproject.toml
+├── requirements.txt
+├── scripts/
+│   └── run_eval.py
 ├── src/
 │   └── hierarchy_migration_validation_agent/
 │       ├── agent/
@@ -29,19 +33,23 @@ Production-style local MVP for validating Oracle Smart View hierarchy migrations
 
 ## Features
 
+- Upload-only workflow for one source workbook plus one target workbook.
 - Ingestion support for either separate workbooks or a single multi-tab Excel workbook that contains Smart View sheets, mappings, and rules together.
-- Ingestion support for flattened hierarchy tabs such as `Level 1 / Level 2 / Level 3 / Level 4` and path-style HCM tabs like `Entity / Business Unit / Department / Cost Center`.
-- Lightweight RAG over mapping workbook content, validation rules, transformation notes, and prior exception history.
-- Explicit validation engine for:
+- Ingestion support for flattened hierarchy tabs such as `Level 1 / Level 2 / Level 3 / Level 4`, path-style HCM tabs like `Entity / Business Unit / Department / Cost Center`, parent-child sheets, and generic ordered hierarchy columns such as `Company / Division / Team`.
+- Deterministic validation engine for:
   - missing members in target
   - parent existence
   - source parent vs target parent mismatch
   - duplicate members
   - leaf/non-leaf consistency
   - level consistency
+  - row-level hierarchy match
+  - numeric value match
   - mapping completeness
   - optional rollup preservation for account totals
-- FastAPI backend endpoints and a Streamlit demo UI.
+- Chroma RAG over mappings, validation rules, transformation notes, prior exceptions, and parsed hierarchy context.
+- Strict local embeddings with `nomic-ai/nomic-embed-text-v1.5`.
+- FastAPI backend and Streamlit demo UI built on the same workflow layer.
 - JSON plus markdown reporting with likely causes and recommended actions.
 - SQLite run registry and persistent Chroma index.
 
@@ -76,24 +84,50 @@ ollama run llama3.2
 
 4. The app uses the local embedding model `nomic-ai/nomic-embed-text-v1.5` for RAG.
    If the model is not cached yet, it will be downloaded on first use unless you set `EMBEDDING_LOCAL_FILES_ONLY=true`.
+5. Start the app you want:
+
+```bash
+python -m uvicorn hierarchy_migration_validation_agent.api.main:app --reload
+```
+
+```bash
+python -m streamlit run src/hierarchy_migration_validation_agent/frontend/streamlit_app.py
+```
 
 ## Demo Flow
 
 1. Upload a source workbook and a target workbook in the Streamlit UI, or send them to `POST /ingest-excel`.
 2. Click `Ingest Uploaded Excel`.
-3. The app parses the uploaded workbooks directly in memory, detects hierarchy and mapping sheets, and automatically rebuilds the RAG index from the uploaded source, target, mappings, rules, notes, and prior exceptions.
-4. Click `Run Validation` and review the generated reports.
+3. The app parses the uploaded workbooks directly in memory, detects hierarchy, measure, mapping, and rule sheets, and automatically rebuilds the RAG index from the uploaded source, target, mappings, rules, notes, and prior exceptions.
+4. Click `Run Validation`.
+5. Review the validation summary, row-level failures, check-by-check results, and downloadable JSON/markdown reports.
+6. After the report is shown, the app clears uploaded source files, target files, and supporting docs so the next run starts clean. Chroma stays on disk and the next ingest uses a new upload-scoped collection.
+
+## Demo Screenshots
+
+The README is set up to show the two main Streamlit demo views below. Place the screenshots at these paths to render them in GitHub:
+
+- `docs/images/demo-source-target-preview.png`
+- `docs/images/demo-validation-checks.png`
+
+### Source And Target Preview
+
+![Source and target hierarchy preview](docs/images/demo-source-target-preview.png)
+
+### Validation Checks And Row-Level Failures
+
+![Validation checks and row-level failures](docs/images/demo-validation-checks.png)
 
 ### Start the API
 
 ```bash
-uvicorn hierarchy_migration_validation_agent.api.main:app --reload
+python -m uvicorn hierarchy_migration_validation_agent.api.main:app --reload
 ```
 
 ### Start the Demo UI
 
 ```bash
-streamlit run src/hierarchy_migration_validation_agent/frontend/streamlit_app.py
+python -m streamlit run src/hierarchy_migration_validation_agent/frontend/streamlit_app.py
 ```
 
 The Streamlit app now uses two uploaders:
@@ -109,7 +143,23 @@ There is no manual `Build RAG Index` step in the UI anymore. Ingestion automatic
 python scripts/run_eval.py
 ```
 
-This runs five benchmark scenarios, scores each case out of 10, and writes JSON plus markdown evaluation reports under `data/reports/evaluations/`.
+Useful options:
+
+```bash
+python scripts/run_eval.py --judge auto
+python scripts/run_eval.py --judge ollama
+python scripts/run_eval.py --judge rubric
+python scripts/run_eval.py --format json
+```
+
+The evaluation script runs five benchmark scenarios, scores each case out of 10, aggregates the result to a percentage, and writes JSON plus markdown evaluation reports under `data/reports/evaluations/`.
+
+Notes:
+
+- `--judge auto` uses Ollama if available, otherwise falls back to a deterministic rubric.
+- `--judge ollama` attempts to use the local Ollama model as the judge.
+- `--judge rubric` skips the LLM judge and uses a deterministic scoring rubric.
+- The evaluation harness uses a deterministic dummy embedding internally so the benchmark stays reproducible and fast.
 
 ## API Endpoints
 
@@ -155,9 +205,11 @@ curl -X POST http://localhost:8000/validate \
 
 ## Key Design Decisions
 
-- `pandas` first: the MVP uses dataframe-based logic because the required validations are transparent, easy to test, and simple to port to SQL or Spark later.
+- `pandas` first: the MVP uses dataframe-based logic because the required validations are transparent, easy to test, and straightforward to port to SQL or Spark later.
+- Direct workbook parsing: uploaded source and target files are parsed in memory instead of relying on persisted normalized CSVs just to run validation.
 - SQLite for run state: report metadata is persisted locally without introducing external infrastructure.
-- Chroma plus local Nomic embeddings: retrieval stays fully local while producing much stronger semantic matches for mappings, rules, notes, and prior exceptions.
+- Chroma plus local Nomic embeddings: retrieval stays local while producing stronger semantic matches for mappings, rules, notes, and prior exceptions.
+- Strict local embedding path: if the local Nomic model or persistent Chroma setup is unavailable, the app now fails loudly instead of falling back to weaker embeddings.
 - Ollama as an optional reasoning layer: validation outcomes are deterministic, while summarization and explanation can use `llama3.2` when available.
 - Shared services for API and UI: FastAPI and Streamlit call the same workflow layer so behavior stays aligned.
 
@@ -165,9 +217,11 @@ curl -X POST http://localhost:8000/validate \
 
 - The target zone is simulated locally and does not connect to real ADLS storage.
 - The RAG layer requires the local Nomic embedding stack to load successfully. If `sentence-transformers`, `einops`, model files, or persistent Chroma storage are not available, indexing will fail and should be fixed before validation.
+- The prompt box in the Streamlit UI is currently a dimension/retrieval hint, not a full natural-language rule planner. It can influence dimension selection and explanation wording, but it does not invent new validation rules.
 - Streamlit and pytest are declared dependencies but may need installation in your local environment before running the UI or tests.
 - Rollup preservation is currently focused on account totals rather than numeric balance reconciliation.
-- The MVP assumes a consistent extract layout; broader workbook variability would need additional schema detection rules.
+- The MVP assumes a reasonably consistent extract layout; broader workbook variability would need additional schema detection rules.
+- Screenshot files are referenced in `docs/images/` and need to be added there for README image rendering.
 
 ## Testing
 
@@ -175,7 +229,7 @@ curl -X POST http://localhost:8000/validate \
 pytest
 ```
 
-The test suite covers ingestion, normalization, each validation rule, and one end-to-end validation flow.
+The automated suite currently covers embeddings, ingestion, normalization helpers, validation rules, RAG behavior, validation text generation, and end-to-end workflow coverage.
 
 ## Multi-Tab Workbook Support
 
