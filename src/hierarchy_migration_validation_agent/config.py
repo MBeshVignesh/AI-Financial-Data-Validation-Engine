@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import tempfile
 from functools import lru_cache
 from pathlib import Path
 
@@ -35,7 +36,7 @@ class Settings(BaseModel):
     @classmethod
     def from_root(cls, root_dir: Path | None = None) -> "Settings":
         root = (root_dir or Path(__file__).resolve().parents[2]).resolve()
-        data_dir = root / "data"
+        data_dir = _resolve_data_dir(root)
         return cls(
             root_dir=root,
             data_dir=data_dir,
@@ -87,3 +88,35 @@ def _env_flag(name: str, default: bool) -> bool:
     if value is None:
         return default
     return value.strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _resolve_data_dir(root_dir: Path) -> Path:
+    configured_data_dir = os.getenv("APP_DATA_DIR")
+    if configured_data_dir:
+        configured_path = Path(configured_data_dir).expanduser().resolve()
+        if _can_write_to_directory(configured_path):
+            return configured_path
+
+    default_data_dir = root_dir / "data"
+    if _can_write_to_directory(default_data_dir):
+        return default_data_dir
+
+    fallback_data_dir = Path(tempfile.gettempdir()) / "ai_financial_data_validation_engine"
+    if _can_write_to_directory(fallback_data_dir):
+        return fallback_data_dir
+
+    raise OSError(
+        "No writable application data directory is available. "
+        "Set APP_DATA_DIR to a writable path for Chroma, uploads, reports, and local state."
+    )
+
+
+def _can_write_to_directory(path: Path) -> bool:
+    probe_path = path / ".write_probe"
+    try:
+        path.mkdir(parents=True, exist_ok=True)
+        probe_path.write_text("ok", encoding="utf-8")
+        probe_path.unlink(missing_ok=True)
+        return True
+    except OSError:
+        return False

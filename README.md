@@ -84,7 +84,9 @@ ollama run llama3.2
 
 4. The app uses the local embedding model `nomic-ai/nomic-embed-text-v1.5` for RAG.
    If the model is not cached yet, it will be downloaded on first use unless you set `EMBEDDING_LOCAL_FILES_ONLY=true`.
-5. Start the app you want:
+5. Hosted Streamlit note: if your deployment filesystem is read-only, set `APP_DATA_DIR=/tmp/ai_financial_data_validation_engine`.
+   The app now also auto-falls back to a writable temp directory when the repo-local `data/` path cannot be written.
+6. Start the app you want:
 
 ```bash
 python -m uvicorn hierarchy_migration_validation_agent.api.main:app --reload
