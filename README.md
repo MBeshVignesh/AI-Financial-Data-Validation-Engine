@@ -6,6 +6,29 @@ The system has three layers: ingestion, validation, and reasoning. Validation is
 
 Built using Python, Pandas, FastAPI, and SQLite for the validation + app layer, with a focused RAG setup using LangChain, Chroma, and Llama 3.2 for context and reasoning. Here's the hosted streamlit webapp, give it a try - https://ai-financial-data-validation-engine.streamlit.app/
 
+## Features
+
+- Upload-only workflow for one source workbook plus one target workbook.
+- Ingestion support for either separate workbooks or a single multi-tab Excel workbook that contains Smart View sheets, mappings, and rules together.
+- Ingestion support for flattened hierarchy tabs such as `Level 1 / Level 2 / Level 3 / Level 4`, path-style HCM tabs like `Entity / Business Unit / Department / Cost Center`, parent-child sheets, and generic ordered hierarchy columns such as `Company / Division / Team`.
+- Deterministic validation engine for:
+  - missing members in target
+  - parent existence
+  - source parent vs target parent mismatch
+  - duplicate members
+  - leaf/non-leaf consistency
+  - level consistency
+  - row-level hierarchy match
+  - numeric value match
+  - mapping completeness
+  - optional rollup preservation for account totals
+- Chroma RAG over mappings, validation rules, transformation notes, prior exceptions, and parsed hierarchy context.
+- Strict local embeddings with `nomic-ai/nomic-embed-text-v1.5`.
+- FastAPI backend and Streamlit demo UI built on the same workflow layer.
+- JSON plus markdown reporting with likely causes and recommended actions.
+- SQLite run registry and persistent Chroma index.
+
+
 ## Repo Tree
 
 ```text
@@ -35,27 +58,6 @@ Built using Python, Pandas, FastAPI, and SQLite for the validation + app layer, 
 └── tests/
 ```
 
-## Features
-
-- Upload-only workflow for one source workbook plus one target workbook.
-- Ingestion support for either separate workbooks or a single multi-tab Excel workbook that contains Smart View sheets, mappings, and rules together.
-- Ingestion support for flattened hierarchy tabs such as `Level 1 / Level 2 / Level 3 / Level 4`, path-style HCM tabs like `Entity / Business Unit / Department / Cost Center`, parent-child sheets, and generic ordered hierarchy columns such as `Company / Division / Team`.
-- Deterministic validation engine for:
-  - missing members in target
-  - parent existence
-  - source parent vs target parent mismatch
-  - duplicate members
-  - leaf/non-leaf consistency
-  - level consistency
-  - row-level hierarchy match
-  - numeric value match
-  - mapping completeness
-  - optional rollup preservation for account totals
-- Chroma RAG over mappings, validation rules, transformation notes, prior exceptions, and parsed hierarchy context.
-- Strict local embeddings with `nomic-ai/nomic-embed-text-v1.5`.
-- FastAPI backend and Streamlit demo UI built on the same workflow layer.
-- JSON plus markdown reporting with likely causes and recommended actions.
-- SQLite run registry and persistent Chroma index.
 
 ## Setup
 
