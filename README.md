@@ -4,6 +4,8 @@ Built a deterministic validation engine that operates on structured hierarchy an
 
 The system has three layers: ingestion, validation, and reasoning. Validation is fully deterministic to ensure correctness, while AI is used before validation to interpret business context and after validation to explain discrepancies.
 
+Built using Python, Pandas, FastAPI, and SQLite for the validation + app layer, with a focused RAG setup using LangChain, Chroma, and Llama 3.2 for context and reasoning. Here's the hosted streamlit webapp, give it a try - https://ai-financial-data-validation-engine.streamlit.app/
+
 ## Repo Tree
 
 ```text
