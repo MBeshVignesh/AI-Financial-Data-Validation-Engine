@@ -143,7 +143,7 @@ def main() -> None:
     st.set_page_config(page_title="AI Financial Data Validation Engine (Hierarchical and Row-Level)", layout="wide")
     workflow = _get_workflow()
     st.title("AI Financial Data Validation Engine (Hierarchical and Row-Level)")
-    st.caption("Validate Oracle Smart View hierarchy extracts against local ADLS-style curated targets.")
+    st.caption("Compare uploaded source and target hierarchy workbooks and surface migration exceptions with explanations.")
     cleanup_notice = st.session_state.pop("cleanup_notice", None)
     if cleanup_notice:
         st.info(cleanup_notice)
