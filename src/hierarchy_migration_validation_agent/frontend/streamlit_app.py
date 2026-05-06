@@ -119,8 +119,30 @@ def _business_preview_frame(frame: pd.DataFrame) -> pd.DataFrame:
     return business
 
 
-def _render_hierarchy_preview(title: str, preview_items: list[tuple[str, pd.DataFrame]], empty_message: str) -> None:
-    st.subheader(title)
+def _measure_preview_frame(frame: pd.DataFrame) -> pd.DataFrame:
+    if frame.empty:
+        return frame
+    preview = frame.copy()
+    priority_columns = [
+        column
+        for column in ["dataset_name", "dimension"]
+        if column in preview.columns
+    ]
+    numeric_columns = [
+        column
+        for column in preview.columns
+        if column not in priority_columns and pd.api.types.is_numeric_dtype(preview[column])
+    ]
+    detail_columns = [
+        column
+        for column in preview.columns
+        if column not in priority_columns and column not in numeric_columns
+    ]
+    ordered_columns = priority_columns + detail_columns + numeric_columns
+    return preview.loc[:, ordered_columns]
+
+
+def _render_hierarchy_sections(preview_items: list[tuple[str, pd.DataFrame]]) -> bool:
     rendered = False
     for label, frame in preview_items:
         if frame.empty:
@@ -135,13 +157,52 @@ def _render_hierarchy_preview(title: str, preview_items: list[tuple[str, pd.Data
         stat_cols[3].metric("Levels", stats["levels"])
         st.caption("Tree Node is indented by hierarchy level so you can read the structure more easily.")
         st.dataframe(_business_preview_frame(frame), width="stretch", height=260, hide_index=True)
-    if not rendered:
+    return rendered
+
+
+def _render_measure_sections(preview_items: list[tuple[str, pd.DataFrame]]) -> bool:
+    rendered = False
+    for label, frame in preview_items:
+        if frame.empty:
+            continue
+        rendered = True
+        st.markdown(f"**{label}**")
+        numeric_columns = [column for column in frame.columns if pd.api.types.is_numeric_dtype(frame[column])]
+        stat_cols = st.columns(4)
+        stat_cols[0].metric("Rows", int(len(frame)))
+        stat_cols[1].metric("Columns", int(len(frame.columns)))
+        stat_cols[2].metric("Numeric Measures", int(len(numeric_columns)))
+        dataset_count = int(frame["dataset_name"].nunique()) if "dataset_name" in frame.columns else 1
+        stat_cols[3].metric("Datasets", dataset_count)
+        st.caption("Preview shows parsed measure rows when the uploaded workbook contains tabular numeric data.")
+        st.dataframe(_measure_preview_frame(frame), width="stretch", height=260, hide_index=True)
+    return rendered
+
+
+def _render_upload_preview(
+    title: str,
+    hierarchy_items: list[tuple[str, pd.DataFrame]],
+    measure_items: list[tuple[str, pd.DataFrame]],
+    empty_message: str,
+) -> None:
+    st.subheader(title)
+    rendered_hierarchy = _render_hierarchy_sections(hierarchy_items)
+    rendered_measures = _render_measure_sections(measure_items)
+    if not rendered_hierarchy and not rendered_measures:
         st.info(empty_message)
+
+
+def _initialize_page_session(workflow: ValidationWorkflow) -> None:
+    if st.session_state.get("page_session_initialized", False):
+        return
+    workflow.clear_runtime_state(clear_index=False, clear_uploaded_files=True, clear_supporting_docs=False)
+    st.session_state["page_session_initialized"] = True
 
 
 def main() -> None:
     st.set_page_config(page_title="AI Financial Data Validation Engine (Hierarchical and Row-Level)", layout="wide")
     workflow = _get_workflow()
+    _initialize_page_session(workflow)
     st.title("AI Financial Data Validation Engine (Hierarchical and Row-Level)")
     st.caption("Compare uploaded source and target hierarchy workbooks and surface migration exceptions with explanations.")
     cleanup_notice = st.session_state.pop("cleanup_notice", None)
@@ -224,23 +285,31 @@ def main() -> None:
     previews = workflow.preview_dataframes()
     source_col, target_col = st.columns(2)
     with source_col:
-        _render_hierarchy_preview(
+        _render_upload_preview(
             "Source Preview",
-            [
+            hierarchy_items=[
                 ("Entity Hierarchy", previews["source_entity"]),
                 ("Account Hierarchy", previews["source_account"]),
             ],
-            "No source hierarchy loaded yet.",
+            measure_items=[
+                ("Entity Measures", previews["source_entity_measures"]),
+                ("Account Measures", previews["source_account_measures"]),
+            ],
+            empty_message="No source workbook data loaded yet.",
         )
 
     with target_col:
-        _render_hierarchy_preview(
+        _render_upload_preview(
             "Target Preview",
-            [
+            hierarchy_items=[
                 ("Entity Hierarchy", previews["target_entity"]),
                 ("Account Hierarchy", previews["target_account"]),
             ],
-            "No target hierarchy loaded yet.",
+            measure_items=[
+                ("Entity Measures", previews["target_entity_measures"]),
+                ("Account Measures", previews["target_account_measures"]),
+            ],
+            empty_message="No target workbook data loaded yet.",
         )
 
     report = st.session_state.get("report")
